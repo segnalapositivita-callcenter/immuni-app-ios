@@ -55,6 +55,7 @@ enum Screen: String, CaseIterable {
   case updateCountry
   case faq
   case question
+  case chooseDataUploadMode
 }
 
 // MARK: - Root
@@ -434,7 +435,11 @@ extension SettingsNC: RoutableWithConfiguration {
         let ls = context as? UploadDataLS ?? AppLogger.fatalError("invalid context")
         return UploadDataVC(store: self.store, localState: ls)
       },
-
+        
+      .show(Screen.chooseDataUploadMode): .push { _ in
+          return ChooseDataUploadModeVC(store: self.store, localState: ChooseDataUploadModeLS())
+        },
+        
       .show(Screen.faq): .push { _ in
         FaqVC(store: self.store, localState: FAQLS(isPresentedModally: false))
       },
@@ -458,11 +463,12 @@ extension SettingsNC: RoutableWithConfiguration {
       .show(Screen.privacy): .presentModally { context in
         PrivacyVC(store: self.store, localState: .init(kind: .settings))
       },
-
+        
       .hide(Screen.uploadData): .pop,
       .hide(Screen.faq): .pop,
       .hide(Screen.updateProvince): .dismissModally(behaviour: .hard),
-      .hide(Screen.privacy): .dismissModally(behaviour: .hard)
+      .hide(Screen.privacy): .dismissModally(behaviour: .hard),
+      .hide(Screen.chooseDataUploadMode): .pop,
     ]
   }
 }
@@ -472,6 +478,16 @@ extension SettingsNC: RoutableWithConfiguration {
 extension UploadDataVC: RoutableWithConfiguration {
   var routeIdentifier: RouteElementIdentifier {
     return Screen.uploadData.rawValue
+  }
+
+  var navigationConfiguration: [NavigationRequest: NavigationInstruction] {
+    return [:]
+  }
+}
+
+extension ChooseDataUploadModeVC: RoutableWithConfiguration {
+  var routeIdentifier: RouteElementIdentifier {
+    return Screen.chooseDataUploadMode.rawValue
   }
 
   var navigationConfiguration: [NavigationRequest: NavigationInstruction] {

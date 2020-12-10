@@ -60,6 +60,20 @@ extension Logic.DataUpload {
     }
   }
 
+  /// Shows the  Choose Data Upload Mode screen
+  struct ShowChooseDataUploadMode: AppSideEffect {
+     
+      func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
+
+        let state = context.getState()
+        let now = context.dependencies.now()
+        
+        let ls = ChooseDataUploadModeLS()
+        
+        try context.awaitDispatch(Show(Screen.chooseDataUploadMode, animated: true, context: ls))
+      }
+    }
+    
   /// Performs the validation of the provided OTP
   struct VerifyCode: AppSideEffect {
     let code: OTP

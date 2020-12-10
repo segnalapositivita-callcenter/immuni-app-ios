@@ -38,8 +38,10 @@ class SettingsVC: ViewControllerWithLocalState<SettingsView> {
 private extension SettingsVC {
   func handleInteraction(with setting: SettingsVM.Setting) {
     switch setting {
+//    case .loadData:
+//      self.dispatch(Logic.Settings.ShowUploadData())
     case .loadData:
-      self.dispatch(Logic.Settings.ShowUploadData())
+      self.dispatch(Logic.Settings.ShowChooseDataUploadMode())
     case .faq:
       self.dispatch(Logic.Settings.ShowFAQs())
     case .tos:
