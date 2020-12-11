@@ -31,6 +31,8 @@ extension Logic.Settings {
 
   /// Shows the Upload Data screen
   struct ShowUploadData: AppSideEffect {
+    
+    /// Selects page labels based on the type of upload
     let isAutonomousMode: Bool
     
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {

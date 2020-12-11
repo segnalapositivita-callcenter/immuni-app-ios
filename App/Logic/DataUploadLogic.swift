@@ -30,6 +30,8 @@ extension Logic.DataUpload {
     /// A threshold to make past failed attempts expire, so that in case of another failed attempt after a long time the
     /// exponential backoff starts from the beginning
     static let recentFailedAttemptsThreshold: TimeInterval = 24 * 60 * 60
+    
+    /// Selects page labels based on the type of upload
     let isAutonomousMode: Bool
 
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
@@ -73,7 +75,6 @@ extension Logic.DataUpload {
   struct ShowChooseDataUploadMode: AppSideEffect {
      
       func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
-        
         try context.awaitDispatch(Show(Screen.chooseDataUploadMode, animated: true, context: ChooseDataUploadModeLS()))
       }
     }

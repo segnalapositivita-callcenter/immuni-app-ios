@@ -86,6 +86,9 @@ extension AppDelegate {
     case .onboardingStep:
       let navigationContext = context as? OnboardingContainerNC.NavigationContext ?? AppLogger.fatalError("Invalid context")
       mainViewController = OnboardingContainerNC(with: self.store, navigationContext: navigationContext)
+    
+    case .chooseDataUploadMode:
+        mainViewController = HomeNC(store: self.store)
 
     default:
       AppLogger.fatalError("Root screen not handled: \(rootScreen.rawValue)")
@@ -473,6 +476,36 @@ extension SettingsNC: RoutableWithConfiguration {
       .hide(Screen.faq): .pop,
       .hide(Screen.updateProvince): .dismissModally(behaviour: .hard),
       .hide(Screen.privacy): .dismissModally(behaviour: .hard),
+      .hide(Screen.chooseDataUploadMode): .pop,
+      .hide(Screen.uploadDataAutonomous): .pop,
+
+    ]
+  }
+}
+
+// MARK: - Home
+
+extension HomeNC: RoutableWithConfiguration {
+  var routeIdentifier: RouteElementIdentifier {
+    return Screen.home.rawValue
+  }
+
+  var navigationConfiguration: [NavigationRequest: NavigationInstruction] {
+    return [
+      .show(Screen.uploadData): .push { context in
+        let ls = context as? UploadDataLS ?? AppLogger.fatalError("invalid context")
+        return UploadDataVC(store: self.store, localState: ls)
+      },
+        
+      .show(Screen.uploadDataAutonomous): .push { _ in
+        return UploadDataAutonomousVC(store: self.store, localState: UploadDataAutonomousLS())
+        },
+        
+      .show(Screen.chooseDataUploadMode): .push { _ in
+          return ChooseDataUploadModeVC(store: self.store, localState: ChooseDataUploadModeLS())
+        },
+        
+      .hide(Screen.uploadData): .pop,
       .hide(Screen.chooseDataUploadMode): .pop,
       .hide(Screen.uploadDataAutonomous): .pop,
 
