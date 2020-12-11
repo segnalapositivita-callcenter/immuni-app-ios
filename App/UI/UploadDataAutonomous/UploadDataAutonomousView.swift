@@ -57,7 +57,6 @@ class UploadDataAutonomousView: UIView, ViewControllerModellableView {
   private var actionButton = ButtonWithInsets()
     
   private var contactButton = TextButton()
-    //  var didTapCallCenter: Interaction?
 
   var didTapBack: Interaction?
   var didTapAction: Interaction?

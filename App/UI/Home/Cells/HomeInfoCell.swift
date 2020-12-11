@@ -28,6 +28,8 @@ struct HomeInfoCellVM: ViewModel {
       return AnimationAsset.cardPerson.animation
     case .updateCountry:
       return AnimationAsset.cardFlagEuropa.animation
+    case .reportPositivity:
+      return AnimationAsset.cardReportPositivity.animation
     }
   }
 
@@ -39,6 +41,8 @@ struct HomeInfoCellVM: ViewModel {
       return L10n.HomeView.Info.App.title
     case .updateCountry:
       return L10n.HomeView.Info.UpdateCountries.title
+    case .reportPositivity:
+      return "Segnala positività in autonomia"
     }
   }
 
@@ -50,6 +54,8 @@ struct HomeInfoCellVM: ViewModel {
       return false
     case .updateCountry:
       return false
+    case .reportPositivity:
+      return false
     }
   }
 
@@ -60,6 +66,8 @@ struct HomeInfoCellVM: ViewModel {
     case .app:
       return .cardLightBlue
     case .updateCountry:
+      return .cardLightBlue
+    case .reportPositivity:
       return .cardLightBlue
     }
   }
@@ -117,7 +125,7 @@ class HomeInfoCell: UICollectionViewCell, ModellableView, ReusableView {
       return
     }
 
-    if model.kind == .updateCountry {
+    if model.kind == .reportPositivity {
       Self.Style.logoNewEuropa(self.cardImageNew)
     } else {
       self.cardImageNew.image = nil

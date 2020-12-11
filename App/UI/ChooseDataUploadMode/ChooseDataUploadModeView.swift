@@ -33,6 +33,7 @@ class ChooseDataUploadModeView: UIView, ViewControllerModellableView {
 
     private static let horizontalSpacing: CGFloat = 30.0
     static let orderRightMargin: CGFloat = UIDevice.getByScreen(normal: 70, narrow: 50)
+    static let labelLeftMargin: CGFloat = 25
 
     private let backgroundGradientView = GradientView()
     private let title = UILabel()

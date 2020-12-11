@@ -19,10 +19,10 @@ import Katana
 import PinLayout
 import Tempura
 
-struct UploadDataAutonomousHealthCardVM: ViewModel {
-}
+struct UploadDataAutonomousHealthCardVM: ViewModel {}
 
 final class UploadDataAutonomousHealthCard: UICollectionViewCell, ModellableView, ReusableView {
+  typealias VM = UploadDataAutonomousHealthCardVM
   private static let textHorizontalPadding: CGFloat = 25.0
   private static let imageToTextPadding: CGFloat = 17.0
 
@@ -51,14 +51,11 @@ final class UploadDataAutonomousHealthCard: UICollectionViewCell, ModellableView
     Self.Style.imageContent(self.imageContent)
   }
 
-  func update(oldModel: PrivacyItemCellVM?) {
-    guard let model = self.model else {
+  func update(oldModel: VM?) {
+    guard let _ = self.model else {
       return
     }
-
-    if model.shouldInvalidateLayout(oldVM: oldModel) {
       self.setNeedsLayout()
-    }
   }
 
   override func layoutSubviews() {

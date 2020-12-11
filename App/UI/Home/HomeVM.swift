@@ -27,6 +27,7 @@ struct HomeVM: ViewModelWithState {
     case protection
     case app
     case updateCountry
+    case reportPositivity
   }
 
   enum CellType: Equatable {
@@ -84,9 +85,10 @@ extension HomeVM {
     var cells: [CellType] = [
       .serviceActiveCard(isServiceActive: isServiceActive),
       .infoHeader,
+      .info(kind: .reportPositivity),
       .info(kind: .app)
     ]
-
+    
     switch covidStatus {
     case .neutral:
       cells.append(.info(kind: .protection))

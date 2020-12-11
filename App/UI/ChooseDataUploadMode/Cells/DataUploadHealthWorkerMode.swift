@@ -17,9 +17,7 @@ import Tempura
 
 import Extensions
 
-struct DataUploadHealthWorkerModeVM: ViewModel {
-    let isLoading: Bool
-}
+struct DataUploadHealthWorkerModeVM: ViewModel {}
 
 // MARK: - View
 
@@ -32,6 +30,7 @@ class DataUploadHealthWorkerModeView: UIView, ModellableView, ReusableView {
     static let labelTopMargin: CGFloat = 10
     static let buttonTopMargin: CGFloat = 20
     static let buttonMinHeight: CGFloat = 55
+    static let orderRightMargin: CGFloat = UIDevice.getByScreen(normal: 70, narrow: 50)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -88,7 +87,6 @@ class DataUploadHealthWorkerModeView: UIView, ModellableView, ReusableView {
         guard let _ = model else {
             return
         }
-        
         setNeedsLayout()
     }
 
@@ -104,40 +102,37 @@ class DataUploadHealthWorkerModeView: UIView, ModellableView, ReusableView {
 
         title.pin
             .left(Self.labelLeftMargin)
-            .right(ChooseDataUploadModeView.orderRightMargin)
+            .right(DataUploadHealthWorkerModeView.orderRightMargin)
             .top(Self.containerInset)
             .sizeToFit(.width)
         
         message.pin
             .left(Self.labelLeftMargin)
-            .right(ChooseDataUploadModeView.orderRightMargin)
+            .right(DataUploadHealthWorkerModeView.orderRightMargin)
             .below(of: self.title)
             .sizeToFit(.width)
             .marginTop(DataUploadHealthWorkerModeView.labelTopMargin)
 
         actionButton.pin
             .left(Self.labelLeftMargin)
-            .right(ChooseDataUploadModeView.orderRightMargin)
-            .sizeToFit(.width)
-//            .size(self.buttonSize(for: self.bounds.width))
+            .right(DataUploadHealthWorkerModeView.orderRightMargin)
+            .size(self.buttonSize(for: self.bounds.width))
             .minHeight(Self.buttonMinHeight)
             .below(of: self.message)
-            .marginTop(DataUploadHealthWorkerModeView.buttonTopMargin)
+            .marginTop(DataUploadAutonomousModeView.buttonTopMargin)
         
         imageContent.pin
             .after(of: title, aligned: .center)
-//          .right(DataUploadHealthWorkerModeView.imageRightMargin)
           .sizeToFit()
     }
 
     func buttonSize(for width: CGFloat) -> CGSize {
-      let labelWidth = width - ChooseDataUploadModeView.orderRightMargin - DataUploadHealthWorkerModeView.labelLeftMargin
-      let titleSize = title.sizeThatFits(CGSize(width: labelWidth, height: .infinity))
+      let labelWidth = width - DataUploadHealthWorkerModeView.orderRightMargin - DataUploadHealthWorkerModeView.labelLeftMargin
 
       var buttonSize = self.actionButton.titleLabel?.sizeThatFits(CGSize(width: labelWidth, height: CGFloat.infinity)) ?? .zero
         
-      buttonSize.width = buttonSize.width + titleSize.width - DataUploadHealthWorkerModeView.labelLeftMargin
-      buttonSize.height = max(DataUploadHealthWorkerModeView.buttonMinHeight, DataUploadHealthWorkerModeView.buttonMinHeight)
+      buttonSize.width = width - DataUploadHealthWorkerModeView.orderRightMargin - DataUploadHealthWorkerModeView.labelLeftMargin
+      buttonSize.height = DataUploadAutonomousModeView.buttonMinHeight
 
       return buttonSize
     }
@@ -145,7 +140,7 @@ class DataUploadHealthWorkerModeView: UIView, ModellableView, ReusableView {
 
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let imageSize = self.imageContent.intrinsicContentSize
-        let labelWidth = size.width - ChooseDataUploadModeView.orderRightMargin - DataUploadHealthWorkerModeView.labelLeftMargin
+        let labelWidth = size.width - DataUploadHealthWorkerModeView.orderRightMargin - DataUploadHealthWorkerModeView.labelLeftMargin
             - 2 * DataUploadHealthWorkerModeView.containerInset - imageSize.width
         let titleSize = title.sizeThatFits(CGSize(width: labelWidth, height: .infinity))
         let messageSize = message.sizeThatFits(CGSize(width: labelWidth, height: .infinity))

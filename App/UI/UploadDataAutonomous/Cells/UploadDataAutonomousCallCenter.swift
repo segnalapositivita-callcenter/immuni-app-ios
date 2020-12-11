@@ -19,8 +19,7 @@ import Katana
 import PinLayout
 import Tempura
 
-struct UploadDataAutonomousCallCenterVM: ViewModel {
-}
+struct UploadDataAutonomousCallCenterVM: ViewModel {}
 
 final class UploadDataAutonomousCallCenter: UICollectionViewCell, ModellableView, ReusableView {
   typealias VM = UploadDataAutonomousCallCenterVM
