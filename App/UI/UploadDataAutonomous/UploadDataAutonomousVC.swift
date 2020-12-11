@@ -28,6 +28,9 @@ class UploadDataAutonomousVC: ViewControllerWithLocalState<UploadDataAutonomousV
     self.rootView.didTapAction = { [weak self] in
       self?.dispatch(Logic.Settings.ShowUploadData())
     }
+    self.rootView.didTapCallCenter = { [weak self] in
+      self?.dispatch(Logic.Shared.DialPhoneNumber(number: "800912491"))
+    }
   }
 }
 

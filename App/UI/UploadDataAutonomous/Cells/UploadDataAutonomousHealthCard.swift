@@ -110,7 +110,7 @@ private extension UploadDataAutonomousHealthCard {
     }
 
     static func imageContent(_ imageView: UIImageView) {
-      imageView.image = Asset.Settings.UploadData.calendar.image
+      imageView.image = Asset.Settings.UploadData.id.image
       imageView.contentMode = .scaleAspectFit
     }
   }

@@ -37,7 +37,6 @@ extension Logic.DataUpload {
       let state = context.getState()
       let now = context.dependencies.now()
       let failedAttempts = state.ingestion.otpValidationFailedAttempts
-
       let errorSecondsLeft: Int
       let recentFailedAttempts: Int
 

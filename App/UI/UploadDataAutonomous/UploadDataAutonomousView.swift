@@ -41,6 +41,7 @@ class UploadDataAutonomousView: UIView, ViewControllerModellableView {
   typealias VM = UploadDataAutonomousVM
 
   private static let horizontalSpacing: CGFloat = 30.0
+  static let cellSpacing: CGFloat = 25
   static let orderLeftMargin: CGFloat = UIDevice.getByScreen(normal: 70, narrow: 50)
 
   private let backgroundGradientView = GradientView()
@@ -54,9 +55,13 @@ class UploadDataAutonomousView: UIView, ViewControllerModellableView {
   private let symptomsDateCell = UploadDataAutonomousSymptomsDate()
   private let messageCard = UploadDataMessageView()
   private var actionButton = ButtonWithInsets()
+    
+  private var contactButton = TextButton()
+    //  var didTapCallCenter: Interaction?
 
   var didTapBack: Interaction?
   var didTapAction: Interaction?
+  var didTapCallCenter: Interaction?
 
   // MARK: - Setup
 
@@ -65,19 +70,24 @@ class UploadDataAutonomousView: UIView, ViewControllerModellableView {
     self.addSubview(self.scrollView)
     self.addSubview(self.title)
     self.addSubview(self.backButton)
-    self.addSubview(actionButton)
-
+    self.addSubview(self.actionButton)
+    self.addSubview(self.contactButton)
+        
     self.scrollView.addSubview(self.headerView)
     self.scrollView.addSubview(self.cunCell)
     self.scrollView.addSubview(self.healthCardCell)
     self.scrollView.addSubview(self.symptomsDateCell)
     self.scrollView.addSubview(self.callCenterCell)
+    self.scrollView.addSubview(self.contactButton)
 
     self.backButton.on(.touchUpInside) { [weak self] _ in
       self?.didTapBack?()
     }
     self.actionButton.on(.touchUpInside) { [weak self] _ in
         self?.didTapAction?()
+    }
+    self.contactButton.on(.touchUpInside) { [weak self] _ in
+        self?.didTapCallCenter?()
     }
 
   }
@@ -92,20 +102,17 @@ class UploadDataAutonomousView: UIView, ViewControllerModellableView {
 
     SharedStyle.navigationBackButton(self.backButton)
     SharedStyle.primaryButton(actionButton, title: L10n.UploadData.Verify.button)
+    Self.Style.contactButton(self.contactButton, content: "800 91 24 91")
 
   }
 
   // MARK: - Update
 
   func update(oldModel: VM?) {
-    guard let model = self.model else {
+    guard let _ = self.model else {
       return
     }
-
-    self.headerView.model = model.headerVM
-    self.messageCard.model = model.messageVM
     self.setNeedsLayout()
-
   }
 
   // MARK: - Layout
@@ -140,32 +147,39 @@ class UploadDataAutonomousView: UIView, ViewControllerModellableView {
         .horizontally()
         .sizeToFit(.width)
         .below(of: self.headerView)
-        .marginTop(20)
+        .marginTop(Self.cellSpacing)
     
     self.healthCardCell.pin
         .horizontally()
         .sizeToFit(.width)
         .below(of: self.cunCell)
-        .marginTop(20)
+        .marginTop(Self.cellSpacing)
     
     self.symptomsDateCell.pin
         .horizontally()
         .sizeToFit(.width)
         .below(of: self.healthCardCell)
-        .marginTop(20)
+        .marginTop(Self.cellSpacing)
     
     self.callCenterCell.pin
         .horizontally()
         .sizeToFit(.width)
         .below(of: self.symptomsDateCell)
-        .marginTop(20)
+        .marginTop(Self.cellSpacing)
+    
+    self.contactButton.pin
+        .horizontally(Self.horizontalSpacing + self.backButton.intrinsicContentSize.width + 20)
+        .sizeToFit(.width)
+        .below(of: self.callCenterCell)
+        .marginTop(Self.cellSpacing)
+
     
     self.actionButton.pin
         .horizontally(35)
         .sizeToFit(.width)
         .minHeight(55)
-        .below(of: self.callCenterCell)
-        .marginTop(80)
+        .below(of: self.contactButton)
+        .marginTop(50)
 
     self.scrollView.contentSize = CGSize(width: self.scrollView.bounds.width, height: self.actionButton.frame.maxY)
   }
@@ -202,5 +216,14 @@ private extension UploadDataAutonomousView {
         numberOfLines: 1
       )
     }
+    static func contactButton(_ button: TextButton, content: String) {
+        let textStyle = TextStyles.pLink.byAdding(
+        .color(Palette.primary),
+        .underline(.single, Palette.primary)
+        )
+        button.contentHorizontalAlignment = .left
+        button.attributedTitle = content.styled(with: textStyle)
+        }
+    
   }
 }

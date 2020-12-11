@@ -14,7 +14,6 @@
 
 import Foundation
 import Tempura
-
 import Extensions
 
 struct DataUploadAutonomousModeVM: ViewModel {
@@ -78,7 +77,7 @@ class DataUploadAutonomousModeView: UIView, ModellableView, ReusableView {
         Self.Style.title(self.title)
         
         SharedStyle.primaryButton(actionButton, title: L10n.UploadData.Verify.button)
-        Self.Style.imageContent(self.imageContent, image: Asset.Settings.UploadData.phone.image)
+        Self.Style.imageContent(self.imageContent, image: Asset.Settings.UploadData.phoneCard.image)
 
     }
 
