@@ -16,7 +16,9 @@ import Foundation
 import Lottie
 import Tempura
 
-struct UploadDataHeaderVM: ViewModel {}
+struct UploadDataHeaderVM: ViewModel {
+    let isAutonomousMode: Bool
+}
 
 // MARK: - View
 
@@ -27,7 +29,7 @@ class UploadDataHeaderView: UIView, ModellableView {
   typealias VM = UploadDataHeaderVM
 
   var didTapDiscoverMore: Interaction?
-
+    
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.setup()
@@ -58,14 +60,18 @@ class UploadDataHeaderView: UIView, ModellableView {
 
   func style() {
     Self.Style.background(self)
-    Self.Style.message(self.message)
     Self.Style.discoverMore(self.discoverMore)
   }
 
   // MARK: - Update
 
-  func update(oldModel: VM?) {}
-
+  func update(oldModel: UploadDataHeaderVM?) {
+    guard let model = self.model else {
+      return
+    }
+    Self.Style.message(self.message, isAutonomousMode: model.isAutonomousMode)
+    }
+    
   // MARK: - Layout
 
   override func layoutSubviews() {
@@ -102,8 +108,7 @@ private extension UploadDataHeaderView {
       view.backgroundColor = .clear
     }
 
-    static func message(_ label: UILabel) {
-      let content = L10n.UploadData.Warning.message
+    static func message(_ label: UILabel, isAutonomousMode: Bool) {
 
       let textStyle = TextStyles.p.byAdding(
         .color(Palette.grayNormal),
@@ -112,7 +117,7 @@ private extension UploadDataHeaderView {
 
       TempuraStyles.styleStandardLabel(
         label,
-        content: content,
+        content: isAutonomousMode ? "Questa funzione richiede l'assistenza del call center che ti guiderà nella procedura di segnalazione." : L10n.UploadData.Warning.message,
         style: textStyle
       )
     }

@@ -83,6 +83,8 @@ struct UploadDataLS: LocalState {
   var recentFailedAttempts: Int
   /// The number of seconds until a new request can be performed.
   var errorSecondsLeft: Int
+    
+  var isAutonomousMode: Bool
 
   /// Exponential backoff capped at 30 minutes
   static func backOffDuration(failedAttempts: Int) -> Int {

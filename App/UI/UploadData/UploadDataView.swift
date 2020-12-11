@@ -23,13 +23,14 @@ struct UploadDataVM: ViewModelWithLocalState {
   let isLoading: Bool
   /// The number of seconds until a new request can be performed.
   let errorSecondsLeft: Int
+  var isAutonomousMode: Bool
 
   var headerVM: UploadDataHeaderVM {
-    return UploadDataHeaderVM()
+    return UploadDataHeaderVM(isAutonomousMode: self.isAutonomousMode)
   }
 
   var codeVM: UploadDataCodeVM {
-    return UploadDataCodeVM(order: 1, code: self.code)
+    return UploadDataCodeVM(order: 1, code: self.code, isAutonomousMode: self.isAutonomousMode)
   }
 
   var messageVM: UploadDataMessageVM {
@@ -62,6 +63,7 @@ extension UploadDataVM {
     self.code = state.ingestion.otp
     self.isLoading = localState.isLoading
     self.errorSecondsLeft = localState.errorSecondsLeft
+    self.isAutonomousMode = localState.isAutonomousMode
   }
 }
 

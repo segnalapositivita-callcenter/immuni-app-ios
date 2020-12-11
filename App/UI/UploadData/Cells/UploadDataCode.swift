@@ -19,6 +19,7 @@ import Tempura
 struct UploadDataCodeVM: ViewModel {
   let order: Int
   let code: OTP
+  let isAutonomousMode: Bool
 
   var codeParts: [String] {
     return self.code.codeParts
@@ -65,7 +66,6 @@ class UploadDataCodeView: UIView, ModellableView {
 
   func style() {
     Self.Style.container(self.container)
-    Self.Style.message(self.message)
   }
 
   // MARK: - Update
@@ -77,6 +77,7 @@ class UploadDataCodeView: UIView, ModellableView {
 
     Self.Style.code(self.code, codeParts: model.codeParts)
     Self.Style.orderLabel(self.orderIndicator, order: model.order)
+    Self.Style.message(self.message, isAutonomousMode: model.isAutonomousMode)
 
     // best effort solution to slow down as much as possible the Speech recognition of the code.
     let letters: [Character] = model.codeParts.joined(separator: ".").flatMap { [$0, " "] }
@@ -151,8 +152,8 @@ private extension UploadDataCodeView {
       )
     }
 
-    static func message(_ label: UILabel) {
-      let content = L10n.UploadData.Code.message
+    static func message(_ label: UILabel, isAutonomousMode: Bool) {
+      let content = isAutonomousMode ? "Comunica il codice all'operatore del call center:": L10n.UploadData.Code.message
       let textStyle = TextStyles.pSemibold.byAdding(
         .color(Palette.grayDark),
         .alignment(.left)

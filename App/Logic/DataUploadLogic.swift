@@ -30,6 +30,7 @@ extension Logic.DataUpload {
     /// A threshold to make past failed attempts expire, so that in case of another failed attempt after a long time the
     /// exponential backoff starts from the beginning
     static let recentFailedAttemptsThreshold: TimeInterval = 24 * 60 * 60
+    let isAutonomousMode: Bool
 
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
       try context.awaitDispatch(RefreshOTP())
@@ -54,7 +55,7 @@ extension Logic.DataUpload {
       }
 
       try context.awaitDispatch(Logic.DataUpload.SetDummyTrafficSequenceCancelled(value: true))
-      let ls = UploadDataLS(recentFailedAttempts: recentFailedAttempts, errorSecondsLeft: errorSecondsLeft)
+      let ls = UploadDataLS(recentFailedAttempts: recentFailedAttempts, errorSecondsLeft: errorSecondsLeft, isAutonomousMode: self.isAutonomousMode)
       try context.awaitDispatch(Show(Screen.uploadData, animated: true, context: ls))
     }
   }

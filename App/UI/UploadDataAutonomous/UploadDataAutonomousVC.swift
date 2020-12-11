@@ -26,7 +26,7 @@ class UploadDataAutonomousVC: ViewControllerWithLocalState<UploadDataAutonomousV
       self?.dispatch(Hide(Screen.uploadDataAutonomous, animated: true))
     }
     self.rootView.didTapAction = { [weak self] in
-      self?.dispatch(Logic.Settings.ShowUploadData())
+        self?.dispatch(Logic.Settings.ShowUploadData(isAutonomousMode: true))
     }
     self.rootView.didTapCallCenter = { [weak self] in
       self?.dispatch(Logic.Shared.DialPhoneNumber(number: "800912491"))
