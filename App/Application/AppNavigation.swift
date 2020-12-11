@@ -56,6 +56,7 @@ enum Screen: String, CaseIterable {
   case faq
   case question
   case chooseDataUploadMode
+  case uploadDataAutonomous
 }
 
 // MARK: - Root
@@ -436,6 +437,10 @@ extension SettingsNC: RoutableWithConfiguration {
         return UploadDataVC(store: self.store, localState: ls)
       },
         
+      .show(Screen.uploadDataAutonomous): .push { _ in
+        return UploadDataAutonomousVC(store: self.store, localState: UploadDataAutonomousLS())
+        },
+        
       .show(Screen.chooseDataUploadMode): .push { _ in
           return ChooseDataUploadModeVC(store: self.store, localState: ChooseDataUploadModeLS())
         },
@@ -469,6 +474,8 @@ extension SettingsNC: RoutableWithConfiguration {
       .hide(Screen.updateProvince): .dismissModally(behaviour: .hard),
       .hide(Screen.privacy): .dismissModally(behaviour: .hard),
       .hide(Screen.chooseDataUploadMode): .pop,
+      .hide(Screen.uploadDataAutonomous): .pop,
+
     ]
   }
 }
@@ -478,6 +485,16 @@ extension SettingsNC: RoutableWithConfiguration {
 extension UploadDataVC: RoutableWithConfiguration {
   var routeIdentifier: RouteElementIdentifier {
     return Screen.uploadData.rawValue
+  }
+
+  var navigationConfiguration: [NavigationRequest: NavigationInstruction] {
+    return [:]
+  }
+}
+
+extension UploadDataAutonomousVC: RoutableWithConfiguration {
+  var routeIdentifier: RouteElementIdentifier {
+    return Screen.uploadDataAutonomous.rawValue
   }
 
   var navigationConfiguration: [NavigationRequest: NavigationInstruction] {

@@ -34,6 +34,13 @@ extension Logic.Settings {
       try context.awaitDispatch(Logic.DataUpload.ShowUploadData())
     }
   }
+
+  /// Shows the Upload Data Autonomous screen
+  struct ShowUploadDataAutonomous: AppSideEffect {
+    func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
+      try context.awaitDispatch(Logic.DataUpload.ShowUploadDataAutonomous())
+      }
+    }
     
   /// Shows the Choose Data Upload Mode screen
   struct ShowChooseDataUploadMode: AppSideEffect {

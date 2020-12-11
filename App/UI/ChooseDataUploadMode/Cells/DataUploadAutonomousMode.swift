@@ -77,8 +77,8 @@ class DataUploadAutonomousModeView: UIView, ModellableView, ReusableView {
         Self.Style.message(message)
         Self.Style.title(self.title)
         
-        SharedStyle.primaryButton(actionButton, title: L10n.Onboarding.Region.Abroad.Alert.confirm)
-        Self.Style.imageContent(self.imageContent, image: Asset.Privacy.identity.image)
+        SharedStyle.primaryButton(actionButton, title: L10n.UploadData.Verify.button)
+        Self.Style.imageContent(self.imageContent, image: Asset.Settings.UploadData.phone.image)
 
     }
 

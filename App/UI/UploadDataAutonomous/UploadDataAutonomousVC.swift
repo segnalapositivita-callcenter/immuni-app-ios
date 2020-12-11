@@ -1,4 +1,4 @@
-// ChooseDataUploadModeVC.swift
+// UploadDataAutonomousVC.swift
 // Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
 // Please refer to the AUTHORS file for more information.
 // This program is free software: you can redistribute it and/or modify
@@ -16,25 +16,23 @@ import Foundation
 import Models
 import Tempura
 
-class ChooseDataUploadModeVC: ViewControllerWithLocalState<ChooseDataUploadModeView> {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+class UploadDataAutonomousVC: ViewControllerWithLocalState<UploadDataAutonomousView> {
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
 
-    override func setupInteraction() {
-        rootView.didTapBack = { [weak self] in
-            self?.dispatch(Hide(Screen.chooseDataUploadMode, animated: true))
-        }
-
-        rootView.didTapHealthWorkerMode = { [weak self] in
-            self?.dispatch(Logic.Settings.ShowUploadData())
-        }
-        rootView.didTapAutonomousMode = { [weak self] in
-            self?.dispatch(Logic.Settings.ShowUploadDataAutonomous())
-        }
+  override func setupInteraction() {
+    self.rootView.didTapBack = { [weak self] in
+      self?.dispatch(Hide(Screen.uploadDataAutonomous, animated: true))
     }
+    self.rootView.didTapAction = { [weak self] in
+      self?.dispatch(Logic.Settings.ShowUploadData())
+    }
+  }
 }
 
 // MARK: - LocalState
 
-struct ChooseDataUploadModeLS: LocalState {}
+struct UploadDataAutonomousLS: LocalState {}
+
+import Foundation
