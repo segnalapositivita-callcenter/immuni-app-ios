@@ -166,7 +166,7 @@ private extension DataUploadHealthWorkerModeView {
         }
 
         static func title(_ label: UILabel) {
-            let content = "Sei stato contattato da un Operatore Sanitario?"
+            let content = L10n.Settings.Setting.ChooseDataUpload.HealthWorkerMode.title
             let textStyle = TextStyles.h4.byAdding(
               .color(Palette.purple),
               .alignment(.left)
@@ -180,7 +180,7 @@ private extension DataUploadHealthWorkerModeView {
         }
 
         static func message(_ label: UILabel) {
-            let content = "Segui la procedura per segnalare la tua positività"
+            let content = L10n.Settings.Setting.ChooseDataUpload.HealthWorkerMode.message
             let textStyle = TextStyles.p.byAdding(
                 .color(Palette.grayNormal),
                 .alignment(.left)

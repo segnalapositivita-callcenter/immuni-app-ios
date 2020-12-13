@@ -153,7 +153,7 @@ private extension UploadDataCodeView {
     }
 
     static func message(_ label: UILabel, isAutonomousMode: Bool) {
-      let content = isAutonomousMode ? "Comunica il codice all'operatore del call center:": L10n.UploadData.Code.message
+      let content = isAutonomousMode ? L10n.UploadData.Code.messageAutonomous : L10n.UploadData.Code.message
       let textStyle = TextStyles.pSemibold.byAdding(
         .color(Palette.grayDark),
         .alignment(.left)

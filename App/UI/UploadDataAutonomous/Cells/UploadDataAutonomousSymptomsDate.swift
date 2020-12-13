@@ -91,7 +91,7 @@ final class UploadDataAutonomousSymptomsDate: UICollectionViewCell, ModellableVi
 private extension UploadDataAutonomousSymptomsDate {
   enum Style {
     static func textualContent(_ label: UILabel) {
-      let content = "Data dell’inizio dei primi sintomi"
+        let content = L10n.Settings.Setting.LoadDataAutonomous.symptomsDate
       let textStyle = TextStyles.p.byAdding(
         .color(Palette.grayNormal),
         .xmlRules([

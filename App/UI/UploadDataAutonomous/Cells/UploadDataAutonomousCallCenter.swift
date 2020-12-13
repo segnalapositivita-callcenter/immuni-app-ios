@@ -101,7 +101,7 @@ final class UploadDataAutonomousCallCenter: UICollectionViewCell, ModellableView
 private extension UploadDataAutonomousCallCenter {
   enum Style {
     static func textualContent(_ label: UILabel) {
-      let content = "Numero attivo h24"
+      let content = L10n.Settings.Setting.LoadDataAutonomous.CallCenter.message
       let textStyle = TextStyles.p.byAdding(
         .color(Palette.grayNormal),
         .xmlRules([
@@ -116,7 +116,7 @@ private extension UploadDataAutonomousCallCenter {
       )
     }
     static func title(_ label: UILabel) {
-      let content = "Chiama il call center"
+      let content = L10n.Settings.Setting.LoadDataAutonomous.CallCenter.title
       let textStyle = TextStyles.pSemibold.byAdding(
         .color(Palette.grayDark),
         .alignment(.left)

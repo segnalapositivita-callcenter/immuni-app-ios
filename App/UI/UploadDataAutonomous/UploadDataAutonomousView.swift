@@ -204,7 +204,8 @@ private extension UploadDataAutonomousView {
     }
 
     static func title(_ label: UILabel) {
-      let content = "Hai bisogno di aiuto?"
+      let content = L10n.Settings.Setting.LoadDataAutonomous.title
+        
       TempuraStyles.styleShrinkableLabel(
         label,
         content: content,

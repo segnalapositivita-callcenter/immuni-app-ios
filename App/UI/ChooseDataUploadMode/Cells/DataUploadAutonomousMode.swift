@@ -165,7 +165,7 @@ private extension DataUploadAutonomousModeView {
         }
 
         static func title(_ label: UILabel) {
-            let content = "Vuoi segnalare la tua positività in autonomia?"
+            let content = L10n.Settings.Setting.ChooseDataUpload.AutonomousMode.title
             let textStyle = TextStyles.h4.byAdding(
               .color(Palette.purple),
               .alignment(.left)
@@ -179,7 +179,7 @@ private extension DataUploadAutonomousModeView {
         }
 
         static func message(_ label: UILabel) {
-            let content = "Inserisci i tuoi dati direttamente in app con il supporto del call center che ti aiuterà durante la procedura"
+            let content = L10n.Settings.Setting.ChooseDataUpload.AutonomousMode.message
             let textStyle = TextStyles.p.byAdding(
                 .color(Palette.grayNormal),
                 .alignment(.left)

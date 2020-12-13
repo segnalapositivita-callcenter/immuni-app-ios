@@ -91,7 +91,7 @@ final class UploadDataAutonomousCun: UICollectionViewCell, ModellableView, Reusa
 private extension UploadDataAutonomousCun {
   enum Style {
     static func textualContent(_ label: UILabel) {
-      let content = "Codice CUN presente nel tuo referto."
+        let content = L10n.Settings.Setting.LoadDataAutonomous.cun
       let textStyle = TextStyles.p.byAdding(
         .color(Palette.grayNormal),
         .xmlRules([

@@ -87,7 +87,7 @@ private extension UploadDataAutonomousHeaderView {
     }
 
     static func message(_ label: UILabel) {
-      let content = "Contatta il call center per ricevere assistenza telefonicamente. Ricordati di avere a portata di mano"
+      let content = L10n.Settings.Setting.LoadDataAutonomous.header
 
       let textStyle = TextStyles.p.byAdding(
         .color(Palette.grayNormal),

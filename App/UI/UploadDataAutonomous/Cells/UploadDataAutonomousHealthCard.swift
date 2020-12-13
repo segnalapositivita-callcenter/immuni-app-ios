@@ -91,7 +91,7 @@ final class UploadDataAutonomousHealthCard: UICollectionViewCell, ModellableView
 private extension UploadDataAutonomousHealthCard {
   enum Style {
     static func textualContent(_ label: UILabel) {
-      let content = "Tessera Sanitaria per comunicare le ultime 8 cifre che permettono di salvaguardare la tua privacy"
+        let content = L10n.Settings.Setting.LoadDataAutonomous.healthCard
       let textStyle = TextStyles.p.byAdding(
         .color(Palette.grayNormal),
         .xmlRules([

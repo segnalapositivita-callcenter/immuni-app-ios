@@ -42,7 +42,7 @@ struct HomeInfoCellVM: ViewModel {
     case .updateCountry:
       return L10n.HomeView.Info.UpdateCountries.title
     case .reportPositivity:
-      return "Segnala positività in autonomia"
+      return L10n.HomeView.Info.LoadData.title
     }
   }
 

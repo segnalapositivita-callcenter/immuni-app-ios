@@ -60,7 +60,6 @@ class UploadDataHeaderView: UIView, ModellableView {
 
   func style() {
     Self.Style.background(self)
-    Self.Style.discoverMore(self.discoverMore)
   }
 
   // MARK: - Update
@@ -70,6 +69,8 @@ class UploadDataHeaderView: UIView, ModellableView {
       return
     }
     Self.Style.message(self.message, isAutonomousMode: model.isAutonomousMode)
+    Self.Style.discoverMore(self.discoverMore, isAutonomousMode: model.isAutonomousMode)
+
     }
     
   // MARK: - Layout
@@ -117,12 +118,16 @@ private extension UploadDataHeaderView {
 
       TempuraStyles.styleStandardLabel(
         label,
-        content: isAutonomousMode ? "Questa funzione richiede l'assistenza del call center che ti guiderà nella procedura di segnalazione." : L10n.UploadData.Warning.message,
+        content: isAutonomousMode ? L10n.UploadData.Warning.messageAutonomous : L10n.UploadData.Warning.message,
         style: textStyle
       )
     }
 
-    static func discoverMore(_ button: TextButton) {
+    static func discoverMore(_ button: TextButton, isAutonomousMode: Bool) {
+      guard !isAutonomousMode else{
+        button.removeFromSuperview()
+        return
+      }
       let textStyle = TextStyles.pSemibold.byAdding(
         .color(Palette.primary),
         .alignment(.left)
@@ -131,6 +136,7 @@ private extension UploadDataHeaderView {
       button.contentHorizontalAlignment = .left
       button.contentVerticalAlignment = .bottom
       button.attributedTitle = L10n.UploadData.Warning.discoverMore.styled(with: textStyle)
+      
     }
   }
 }
