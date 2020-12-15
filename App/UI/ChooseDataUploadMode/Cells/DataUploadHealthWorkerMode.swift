@@ -77,7 +77,7 @@ class DataUploadHealthWorkerModeView: UIView, ModellableView, ReusableView {
         Self.Style.title(self.title)
         
         SharedStyle.primaryButton(actionButton, title: L10n.UploadData.Verify.button)
-        Self.Style.imageContent(self.imageContent, image: Asset.Settings.UploadData.callCenter.image)
+        Self.Style.imageContent(self.imageContent, image: Asset.Settings.UploadData.stethoscope.image)
 
     }
 
